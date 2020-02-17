@@ -3,7 +3,6 @@ package main
 import (
 	"archive/zip"
 	"os"
-	"strings"
 )
 
 func main() {
@@ -20,5 +19,4 @@ func main() {
 
 	// 実際のファイルではなく，文字列 strings.Reader を使って zip ファイルを作成する
 	// ラップして渡す
-	reader := strings.NewReader("")
 }

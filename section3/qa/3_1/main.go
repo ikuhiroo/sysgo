@@ -1,5 +1,6 @@
 // ファイルのコピー
 // コマンドラインオプション
+// !go run main.go old.txt new.txt
 package main
 
 import (
@@ -15,9 +16,17 @@ func main() {
 	args := flag.Args()
 	fmt.Println(args)
 
-	reader, _ := os.Open(args[0])
+	reader, err := os.Open(args[0])
+	if err != nil {
+		panic(err)
+	}
 	defer reader.Close()
-	writer, _ := os.Create(args[1])
+
+	writer, err := os.Create(args[1])
+	if err != nil {
+		panic(err)
+	}
 	defer writer.Close()
+
 	io.Copy(writer, reader)
 }

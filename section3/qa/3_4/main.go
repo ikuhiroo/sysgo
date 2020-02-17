@@ -2,8 +2,6 @@
 package main
 
 import (
-	"compress/gzip"
-	"encoding/json"
 	"io"
 	"net/http"
 	"os"
@@ -16,17 +14,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Disposition", "attachment; filename=ascii_sample.zip")
 
 	// WebServer で zip ファイルを作成
-	source := map[string]string{
-		"Hello": "World",
-	}
-	gzipWriter := gzip.NewWriter(w)
-	defer gzipWriter.Close()
-
-	encoder := json.NewEncoder(io.MultiWriter(gzipWriter, os.Stdout))
-	encoder.SetIndent("", "   ")
-	encoder.Encode(source)
+	file, _ := os.Open("log.zip")
+	defer file.Close()
 
 	// アクセスしたら zip ダウンロード
+	io.Copy(w, file)
 }
 
 func main() {

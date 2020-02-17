@@ -6,7 +6,6 @@
 package main
 
 import (
-	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -22,15 +21,14 @@ func main() {
 	var stream io.Reader
 
 	// ここに io パッケージを使ったコードを書く
-	validation := []string{"A", "S", "C", "I", "I"}
-	buffer := new(bytes.Buffer)
-	buffer.ReadFrom(io.MultiReader(computer, system, programming))
+	// io.SectionReader と io.LimitReader を使えば必要な文字を切り出す
+	lReader_1 := io.LimitReader(computer, 1)
+	lReader_2 := io.LimitReader(system, 1)
+	lReader_3 := io.NewSectionReader(programming, 5, 1)
+	lReader_4 := io.NewSectionReader(programming, 8, 1)
+	lReader_5 := io.NewSectionReader(programming, 8, 1)
 
-	for i := 0; i < len(validation); i++ {
-		if strings.Contains(buffer.String(), validation[i]) {
-			stream = append(stream, strings.NewReader(validation[i]))
-		}
-	}
+	stream = io.MultiReader(lReader_3, lReader_2, lReader_1, lReader_4, lReader_5)
 	// 「ASCII」の文字列を出力させる
 	io.Copy(os.Stdout, stream)
 }
