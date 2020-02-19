@@ -1,11 +1,18 @@
 | 略語  | 略さない                     | 説明                                               |
 |-----|--------------------------|--------------------------------------------------|
+|IETF |Internet Engineering Task Force| | 組織 | 
+| RFC | Request for Comments | 規格書，通信が OS や機器の違いを超えてきちんと行えるかどうか，プロトコルにおけるシステムコールともいえる | 
 | RPC | Remote Procedure Calling | サーバーが用意しているさまざまな機能を，ローカルコンピューター上にある関数のように簡単に呼び出す |
-| ソケット通信 | | ポート番号を用いて通信を行う仕組み | 
+| IPC | Inter Process Communication | プロセス間通信 | 
+| ソケット | | アプリケーション層からトランスポート層のプロトコルを利用するときのAPI|
+| ソケット通信 | | アドレスとポート番号を用いて通信を行う仕組み | 
 |TCP/IP 参照モデル | | アプリケーション - トランスポート層 - インターネット層 - リンク層 | 
 | REST | Representational Stare Transfer | サーバーとクライアント間の通信をシンプルなファイルサーバーのような考え方に集約するスタイル | 
 | RESTful | | REST の思想に従うシステム |
-| HATEOAS | 
+| HATEOAS |Hypermedia As The Engine Of Application State| URL をページング情報として扱う（ex. github） |
+| GraphQL | |Facebook 社が提唱しているアプリケーション層のプロトコル |
+| Keep-Alive | |しばらくの間，TCP接続のコネクションを維持し続ける，HTTP/1.1の規格|
+
 
 ## リンク集
 ### [奥さんに REST をどう説明したかというと](http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm)
