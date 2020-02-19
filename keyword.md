@@ -8,4 +8,9 @@
 | HATEOAS | 
 
 ## リンク集
-* [奥さんに REST をどう説明したかというと](http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm)
+### [奥さんに REST をどう説明したかというと](http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm)
+* Web はどうやって動くのか？
+* Web は REST というアーキテクチャの流儀で作られている
+* REST は リソースの定義を用意してる
+* URL はブラウザにリソースがどこにあるかを教える
+* ブラウザはそのリソースの具体的な表現を要求することができる（特に、ブラウザは概念の Web ページ表現を要求することができる）
