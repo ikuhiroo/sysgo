@@ -1,0 +1,1 @@
+/Users/ikuhiro/Desktop/sysgo/section9/9_2_5/move.go
