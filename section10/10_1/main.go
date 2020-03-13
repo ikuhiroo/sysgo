@@ -1,0 +1,59 @@
+// ファイルの変更監視
+package main
+
+import (
+	"log"
+
+	"gopkg.in/fsnotify.v1"
+)
+
+func main() {
+	counter := 0
+	// インスタンス作成
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		panic(err)
+	}
+	defer watcher.Close()
+
+	done := make(chan bool)
+	// goroutine
+	go func() {
+		for {
+			// 並列処理ツールキット
+			select {
+			// チャネル受信
+			case event := <-watcher.Events:
+				log.Println("event:", event)
+				if event.Op&fsnotify.Create == fsnotify.Create {
+					log.Println("created file:", event.Name)
+					counter++
+				} else if event.Op&fsnotify.Write == fsnotify.Write {
+					log.Println("modified file:", event.Name)
+					counter++
+				} else if event.Op&fsnotify.Remove == fsnotify.Remove {
+					log.Println("removed file:", event.Name)
+					counter++
+				} else if event.Op&fsnotify.Rename == fsnotify.Rename {
+					log.Println("renamed file:", event.Name)
+					counter++
+				} else if event.Op&fsnotify.Chmod == fsnotify.Chmod {
+					log.Println("chmod file:", event.Name)
+					counter++
+				}
+			// チャネル受信
+			case err := <-watcher.Errors:
+				log.Println("error:", err)
+			}
+			if counter > 3 {
+				// チャネル受信
+				done <- true
+			}
+		}
+	}()
+	err = watcher.Add(".")
+	if err != nil {
+		log.Fatal(err)
+	}
+	<-done
+}
